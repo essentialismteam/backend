@@ -7,6 +7,7 @@ const Users = require('./auth-helper');
 const router = express.Router();
 
 router.post('/register', (req, res) => {
+    
     let newUser = req.body;
 
     if (!newUser.username || !newUser.password || !newUser.first_name) {
@@ -16,13 +17,17 @@ router.post('/register', (req, res) => {
     } else {
 
         const hash = bcrypt.hashSync(newUser.password, 10);
+
         newUser.password = hash;
 
         Users.registerUser(newUser).then(user => {
-            console.log(user);
+
             res.status(201).json(user);
+
         }).catch(err => {
+
             res.status(500).json(err);
+
         })
 
     }
