@@ -16,4 +16,4 @@ server.get('/', (req, res) => {
     res.status(200).send("Welcome to Essentialism.");
 })
 
-module.expors = server;
+module.exports = server;

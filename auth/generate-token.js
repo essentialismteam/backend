@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const jwtKey = process.env.JWT_SECRET || "You cannot overestimate the unimportance of practically everything.";
 
 module.exports = {
-    generateToken
+    generateToken,
+    jwtKey
 }
 
 // this generates a unique JWT for the logged in user

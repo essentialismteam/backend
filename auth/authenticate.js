@@ -8,12 +8,18 @@ module.exports = {
   authenticate
 };
 
+// custom authentication middleware for protected content
+
 function authenticate(req, res, next) {
+
   const token = req.get("Authorization");
 
   if (token) {
+
     jwt.verify(token, jwtKey, (err, decoded) => {
+
       if (err)
+
         return res
           .status(401)
           .json({
@@ -23,12 +29,16 @@ function authenticate(req, res, next) {
       req.decoded = decoded;
 
       next();
+
     });
+    
   } else {
+
     return res
       .status(401)
       .json({
         error: "Please provide the web token via the Authorization header."
       });
+
   }
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const generateToken = require('./generate-token');
+const Users = require('./auth-helper');
 
 const router = express.Router();
 
