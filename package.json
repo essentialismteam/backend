@@ -5,8 +5,7 @@
   "repository": "https://github.com/essentialismteam/backend.git",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js",
-    "test": "jest --watch --verbose"
+    "server": "nodemon index.js"
   },
   "author": "Leigh-Ann Friedel <leigh.ann.friedel@gmail.com>",
   "license": "MIT",
