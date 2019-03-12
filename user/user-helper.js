@@ -2,7 +2,8 @@ const db = require("../database/db-config");
 
 module.exports = {
   getAllUsers,
-  getCompleteUserInfo
+  getCompleteUserInfo,
+  addJournal
 };
 
 function getAllUsers() {
@@ -32,4 +33,10 @@ async function getCompleteUserInfo(userId) {
     .where("users.id", userId);
 
   return { ...user, ...journal, values, projects };
+}
+
+async function addJournal(entry) {
+    const [id] = await db("journal").insert(entry, "id");
+
+    return id;
 }
