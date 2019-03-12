@@ -31,4 +31,96 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// POST values
+router.post("/:id/values", (req, res) => {
+    const { value_id, user_id } = req.body;
+
+    if (!value_id || !user_id) {
+
+        res.status(400).json({message: "You must submit a value id and user id."})
+        
+    } else {
+
+        User.addValue(req.body).then(id => {
+
+            res.status(201).json(id);
+
+        }).catch(err => {
+
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+        })
+    }
+})
+
+// POST projects
+router.post("/:id/projects", (req, res) => {
+    const { project_name, user_id } = req.body;
+
+    if (!project_name || !user_id) {
+
+        res.status(400).json({message: "You must submit a project name and user id."})
+
+    } else {
+
+        User.addProject(req.body).then(id => {
+
+            res.status(201).json(id);
+
+        }).catch(err => {
+
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+        })
+    }
+
+})
+// POST journal
+router.post("/:id/journal", (req, res) => {
+    const { journal_entry, user_id }  = req.body;
+
+    if (!journal_entry || !user_id) {
+
+        res.status(400).json({message: "You must submit a journal entry and user id."})
+
+    } else {
+
+        User.addJournal(req.body).then(journal => {
+
+            res.status(201).json(journal)
+
+        }).catch(err => {
+
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+
+        })
+    }
+
+})
+
+// PUT values
+
+// PUT projects
+
+// PUT journal
+// router.put("/:id/journal", (req, res) => {
+//     const { journal_entry, user_id }  = req.body;
+
+//     if (!journal_entry || !user_id) {
+
+//         res.status(400).json({message: "You must submit a journal entry and user id."})
+
+//     } else {
+
+//         User.updateJournal(req.body).then(id => {
+
+//             res.status(201).json(id)
+
+//         }).catch(err => {
+
+//             res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+
+//         })
+//     }
+
+// })
+
 module.exports = router;
