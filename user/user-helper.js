@@ -4,8 +4,12 @@ module.exports = {
   getAllUsers,
   getCompleteUserInfo,
   addJournal,
+  getJournalById,
+  updateJournal,
   addProject,
-  addValue
+  getProjectById,
+  addValue,
+  getValueById
 };
 
 function getAllUsers() {
@@ -40,17 +44,48 @@ async function getCompleteUserInfo(userId) {
 async function addJournal(entry) {
     const [id] = await db("journal").insert(entry, "id");
 
-    return id;
+    const newJournal = await getJournalById(id);
+
+    return newJournal;
+}
+
+function getJournalById(id) {
+    const entry = db("journal").select("id", "journal_entry").where("id", id).first();
+
+    return entry;
 }
 
 async function addProject(project) {
     const [id] = await db("projects").insert(project, "id");
 
-    return id;
+    const newProject = await getProjectById(id);
+
+    return newProject;
+}
+
+function getProjectById(id) {
+    const project = db("projects").select("id", "project_name").where("id", id).first();
+
+    return project;
 }
 
 async function addValue(value) {
-    const [id] = await db("user_values").insert(value, "value_id");
+    await db("user_values").insert(value, "value_id");
+    
+    const values = await db("users")
+    .join("user_values", "users.id", "user_values.user_id")
+    .join("values", "values.id", "user_values.value_id")
+    .select("values.value_name as value", "values.id")
+    .where("users.id", value.user_id);
+    
+    return values;
+}
 
+function getValueById(id) {
+    const value = db("values").select()
+}
+
+async function updateJournal(id, entry) {
+    const [id] = await db("journal").where("id", id).update(entry, "id");
     return id;
 }
