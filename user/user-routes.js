@@ -33,7 +33,23 @@ router.get("/:id", (req, res) => {
 
 // POST values
 router.post("/:id/values", (req, res) => {
+    const { value_id, user_id } = req.body;
 
+    if (!value_id || !user_id) {
+
+        res.status(400).json({message: "You must submit a value id and user id."})
+        
+    } else {
+
+        User.addValue(req.body).then(id => {
+
+            res.status(201).json(id);
+
+        }).catch(err => {
+
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+        })
+    }
 })
 
 // POST projects

@@ -4,7 +4,8 @@ module.exports = {
   getAllUsers,
   getCompleteUserInfo,
   addJournal,
-  addProject
+  addProject,
+  addValue
 };
 
 function getAllUsers() {
@@ -44,6 +45,12 @@ async function addJournal(entry) {
 
 async function addProject(project) {
     const [id] = await db("projects").insert(project, "id");
+
+    return id;
+}
+
+async function addValue(value) {
+    const [id] = await db("user_values").insert(value, "value_id");
 
     return id;
 }
