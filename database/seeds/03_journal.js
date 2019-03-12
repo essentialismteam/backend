@@ -1,7 +1,4 @@
 exports.seed = function(knex, Promise) {
-  return knex("journal")
-    .truncate()
-    .then(function() {
       return knex("journal").insert([
         {
           id: 1,
@@ -22,5 +19,4 @@ exports.seed = function(knex, Promise) {
           user_id: 2
         }
       ]);
-    });
 };

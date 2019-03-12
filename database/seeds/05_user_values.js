@@ -1,7 +1,5 @@
 
 exports.seed = function(knex, Promise) {
-  return knex('user_values').truncate()
-    .then(function () {
       return knex('user_values').insert([
         {user_id: 1, value_id: 1},
         {user_id: 1, value_id: 6},
@@ -13,5 +11,4 @@ exports.seed = function(knex, Promise) {
         {user_id: 3, value_id: 5},
         {user_id: 3, value_id: 9},
       ]);
-    });
 };

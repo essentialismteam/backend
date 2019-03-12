@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const generateToken = require('./generate-token');
 const Users = require('./auth-helper');
+const dbErrors = require('../database/db-errors');
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.post('/register', (req, res) => {
 
         }).catch(err => {
 
-            res.status(500).json(err);
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`});
 
         })
 
@@ -52,7 +53,7 @@ router.post('/login', (req, res) => {
             }   
         }).catch(err => {
 
-            res.status(500).json(err);
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`});
         })
 
 

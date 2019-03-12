@@ -1,7 +1,4 @@
 exports.seed = function(knex, Promise) {
-  return knex("values")
-    .truncate()
-    .then(function() {
       return knex("values").insert([
         { id: 1, value_name: "Athletic ability" },
         { id: 2, value_name: "Art and literature" },
@@ -26,5 +23,4 @@ exports.seed = function(knex, Promise) {
         { id: 13, value_name: "Sense of humor" },
         { id: 14, value_name: "Success in my career" }
       ]);
-    });
 };
