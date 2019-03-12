@@ -5,11 +5,11 @@ module.exports = {
   getCompleteUserInfo,
   addJournal,
   getJournalById,
+  getUserJournalByUserId,
   updateJournal,
   addProject,
   getProjectById,
-  addValue,
-  getValueById
+  addValue
 };
 
 function getAllUsers() {
@@ -81,11 +81,14 @@ async function addValue(value) {
     return values;
 }
 
-function getValueById(id) {
-    const value = db("values").select()
+function updateJournal(userId, entry) {
+    return db("journal").where("user_id", userId).update(entry, "id");
 }
 
-async function updateJournal(id, entry) {
-    const [id] = await db("journal").where("id", id).update(entry, "id");
-    return id;
+function getUserJournalByUserId(userId) {
+
+    return db("users")
+    .join("journal", "users.id", "journal.user_id")
+    .select("journal.journal_entry as journal")
+    .where("users.id", userId);
 }

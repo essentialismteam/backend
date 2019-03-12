@@ -101,26 +101,31 @@ router.post("/:id/journal", (req, res) => {
 // PUT projects
 
 // PUT journal
-// router.put("/:id/journal", (req, res) => {
-//     const { journal_entry, user_id }  = req.body;
+router.put("/:id/journal", (req, res) => {
+    const { journal_entry, user_id }  = req.body;
 
-//     if (!journal_entry || !user_id) {
+    if (!journal_entry || !user_id) {
 
-//         res.status(400).json({message: "You must submit a journal entry and user id."})
+        res.status(400).json({message: "You must submit a journal entry and user id."})
 
-//     } else {
+    } else {
 
-//         User.updateJournal(req.body).then(id => {
+        User.updateJournal(user_id, req.body).then(id => {
+            if (id === 1) {
+                return User.getUserJournalByUserId(user_id)
+                .then(updates => {
+                    let [journal] = updates;
+                    res.status(201).json(journal)
+                })
+            };
 
-//             res.status(201).json(id)
+        }).catch(err => {
 
-//         }).catch(err => {
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
 
-//             res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+        })
+    }
 
-//         })
-//     }
-
-// })
+})
 
 module.exports = router;
