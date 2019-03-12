@@ -38,6 +38,23 @@ router.post("/:id/values", (req, res) => {
 
 // POST projects
 router.post("/:id/projects", (req, res) => {
+    const { project_name, user_id } = req.body;
+
+    if (!project_name || !user_id) {
+
+        res.status(400).json({message: "You must submit a project name and user id."})
+
+    } else {
+
+        User.addProject(req.body).then(id => {
+
+            res.status(201).json(id);
+
+        }).catch(err => {
+
+            res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+        })
+    }
 
 })
 // POST journal
@@ -51,9 +68,13 @@ router.post("/:id/journal", (req, res) => {
     } else {
 
         User.addJournal(req.body).then(id => {
+
             res.status(201).json(id)
+
         }).catch(err => {
+
             res.status(500).json({message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}`})
+
         })
     }
 
