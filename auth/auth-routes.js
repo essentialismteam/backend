@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
         newUser.password = hash;
 
         Users.registerUser(newUser).then(user => {
-
+            
             res.status(201).json(user);
 
         }).catch(err => {
