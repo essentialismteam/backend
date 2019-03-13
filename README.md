@@ -5,7 +5,9 @@
 ### Authentication
 
 `/auth/register`
+
 **Method:** POST
+
 **Description:** Register user in the system so they may log in and use the service.
 
 Structure of request object:
@@ -18,8 +20,11 @@ Structure of request object:
 }
 ```
 
+
 `/auth/login`
+
 **Method:** POST
+
 **Description:** Log user into the system so they may access other endpoints.
 
 Structure of request object:
@@ -33,7 +38,9 @@ Structure of request object:
 ### User Info
 
 `/users/:id`
+
 **Method:** PUT
+
 **Description:** Update username, password, first name and last name of user.
 
 Structure of request object:
@@ -46,8 +53,11 @@ Structure of request object:
 }
 ```
 
+
 `/users/:id`
+
 **Method:** GET
+
 **Description:** Retrieve all information about a user, except the user's password.
 
 Structure of response:
@@ -57,7 +67,7 @@ Structure of response:
     "username": "admin",
     "first_name": "John",
     "last_name": "Doe",
-    "journal": "I just want to have fun and be able to do lots of adventurous things. You only live once, and I want to make sure I enjoy life and do as much as I can! I also want to help people be happy too, and I think I can do that by making people laugh.", // does not show up in response if user has not posted a journal entry
+    "journal": "I want to have fun and be able to do lots of adventurous things.", // does not show up in response if user has not posted a journal entry
     "values": [
         {
             "value": "Athletic ability",
@@ -91,7 +101,9 @@ Structure of response:
 ### Values
 
 `/values`
+
 **Method:** GET
+
 **Description:** Returns all values from which a user is able to select.
 
 Structure of response:
@@ -116,7 +128,9 @@ Structure of response:
 ### User Values
 
 `/users/:id/values`
+
 **Method:** POST
+
 **Description:** Lets a user submit a value. Only one value can be submitted per request, but the response will return all existing values for that user.
 
 Structure of request object:
@@ -137,8 +151,11 @@ Structure of response:
 ]
 ```
 
+
 `/users/:id/values`
+
 **Method:** PUT
+
 **Description:** Lets a user update a value. Only one value can be updated per request.
 
 Structure of request object:
@@ -157,8 +174,11 @@ Structure of response:
 }
 ```
 
+
 `/users/:id/values`
+
 **Method:** DELETE
+
 **Description:** Lets a user delete a value. Only one value can be deleted per request.
 
 Structure of request object:
@@ -178,7 +198,9 @@ Structure of response:
 ### User Journal
 
 `/users/:id/journal`
+
 **Method:** POST
+
 **Description:** Lets a user submit a journal entry about their value choices. The response returns the entry as well as the journal id.
 
 Structure of request object:
@@ -196,8 +218,11 @@ Structure of response:
 }
 ```
 
+
 `/users/:id/journal`
+
 **Method:** PUT
+
 **Description:** Lets a user update their journal entry.
 
 Structure of request object:
@@ -214,8 +239,11 @@ Structure of response:
 }
 ```
 
+
 `/users/:id/journal`
+
 **Method:** DELETE
+
 **Description:** Lets a user delete their journal entry. This endpoint does not require a request body; it uses the URL param to locate the appropriate journal entry.
 
 Structure of response:
@@ -228,7 +256,9 @@ Structure of response:
 ### User Projects
 
 `/users/:id/projects`
+
 **Method:** POST
+
 **Description:** Lets a user add a project to their profile. Only one project can be submitted per request.
 
 Structure of request object:
@@ -247,8 +277,11 @@ Structure of response:
 }
 ```
 
+
 `/users/:id/projects`
+
 **Method:** PUT
+
 **Description:** Lets a user update a project. Only one project can be updated per request.
 
 Structure of request object:
@@ -268,8 +301,11 @@ Structure of response:
 }
 ```
 
+
 `/users/:id/projects`
+
 **Method:** DELETE
+
 **Description:** Lets a user delete a project. Only one project can be deleted per request.
 
 Structure of request object:
