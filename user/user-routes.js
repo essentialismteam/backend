@@ -96,41 +96,31 @@ router.put("/:id/values", (req, res) => {
   const { old_value_id, value_id, user_id } = req.body;
 
   if (!old_value_id || !value_id || !user_id) {
-
-    res.status(400).json("You must submit an old value id, new value id, and user id.");
-
+    res
+      .status(400)
+      .json("You must submit an old value id, new value id, and user id.");
   } else {
-
     User.getUserValueByValueId(old_value_id, user_id)
       .then(value => {
-
         if (value) {
-
           User.updateValue(old_value_id, user_id, value_id).then(updated => {
-
-            if (updated === 1) {
-              
+            if (updated > 0) {
               return User.getValueById(value_id).then(newValue => {
-                
                 res.status(200).json(newValue);
-
               });
             }
-
           });
         } else {
-
           res.status(404).json({
             message:
               "The user has not previously specified this value as a priority."
           });
         }
-
       })
       .catch(err => {
-
-        res.status(500).json({ message: "There was an error updating the user's value." });
-        
+        res
+          .status(500)
+          .json({ message: "There was an error updating the user's value." });
       });
   }
 });
@@ -146,7 +136,7 @@ router.put("/:id/projects", (req, res) => {
   } else {
     User.updateProject(id, req.body)
       .then(updated => {
-        if (updated === 1) {
+        if (updated > 0) {
           return User.getProjectById(id).then(project => {
             res.status(201).json(project);
           });
@@ -171,7 +161,7 @@ router.put("/:id/journal", (req, res) => {
   } else {
     User.updateJournal(user_id, req.body)
       .then(updated => {
-        if (updated === 1) {
+        if (updated > 0) {
           return User.getUserJournalByUserId(user_id).then(updates => {
             let [journal] = updates;
             res.status(201).json(journal);
