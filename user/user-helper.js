@@ -170,6 +170,8 @@ function getProjectById(id) {
 
 function deleteJournal(id) {
 
+  return db("journal").where("user_id", id).del();
+  
 }
 
 function deleteProject(id) {
