@@ -176,4 +176,34 @@ router.put("/:id/journal", (req, res) => {
   }
 });
 
+// DELETE projects
+router.delete("/:id/projects", (req, res) => {
+  let { id } = req.body;
+
+  if (!id) {
+    res.status(400).json({message: "You must submit a project id."})
+  } else {
+    User.deleteProject(id).then(deleted => {
+   
+      if (deleted > 0) {
+        res.status(200).json({message: "The project has been successfully deleted."})
+      } else {
+        res.status(404).json({message: "That project id does not exist."})
+      }
+    }).catch(err => {
+      res.status(500).json({message: err})
+    })
+  }
+})
+
+// DELETE journal
+router.delete("/users/:id/journal", (req, res) => {
+
+})
+
+// DELETE values
+router.delete("/users/:id/values", (req, res) => {
+
+})
+
 module.exports = router;

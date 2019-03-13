@@ -13,7 +13,10 @@ module.exports = {
   addValue,
   updateValue,
   getValueById,
-  getUserValueByValueId
+  getUserValueByValueId,
+  deleteJournal,
+  deleteProject,
+  deleteValue
 };
 
 
@@ -162,5 +165,19 @@ function getProjectById(id) {
   return db("projects")
     .where("id", id)
     .first();
-    
+
+}
+
+function deleteJournal(id) {
+
+}
+
+function deleteProject(id) {
+
+  return db("projects").where("id", id).del();
+
+}
+
+function deleteValue(id) {
+
 }
