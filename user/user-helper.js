@@ -10,7 +10,10 @@ module.exports = {
   addProject,
   getProjectById,
   updateProject,
-  addValue
+  addValue,
+  updateValue,
+  getValueById,
+  getUserValueByValueId
 };
 
 function getAllUsers() {
@@ -80,6 +83,24 @@ async function addValue(value) {
     .where("users.id", value.user_id);
     
     return values;
+}
+
+function updateValue(oldValueId, userId, newValueId) {
+
+  return db("user_values").where({value_id: oldValueId, user_id: userId}).update({value_id: newValueId}, "id");
+
+}
+
+function getUserValueByValueId(valueId, userId) {
+
+  return db("user_values").where({value_id: valueId, user_id: userId}).first();
+
+}
+
+function getValueById(id) {
+
+  return db("values").where("id", id).first();
+
 }
 
 function updateJournal(userId, entry) {
