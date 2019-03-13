@@ -4,7 +4,7 @@
 
 ### Authentication
 
-`/auth/register`
+####`/auth/register`
 
 **Method:** POST
 
@@ -30,7 +30,7 @@ Structure of response:
 }
 ```
 
-`/auth/login`
+####`/auth/login`
 
 **Method:** POST
 
@@ -56,7 +56,7 @@ Structure of response:
 
 ### User Info
 
-`/users/:id`
+####`/users/:id`
 
 **Method:** PUT
 
@@ -79,7 +79,7 @@ Structure of response:
 }
 ```
 
-`/users/:id`
+####`/users/:id`
 
 **Method:** GET
 
@@ -125,7 +125,7 @@ Structure of response:
 ```
 ### Values
 
-`/values`
+####`/values`
 
 **Method:** GET
 
@@ -152,7 +152,7 @@ Structure of response:
 
 ### User Values
 
-`/users/:id/values`
+####`/users/:id/values`
 
 **Method:** POST
 
@@ -177,7 +177,7 @@ Structure of response:
 ```
 
 
-`/users/:id/values`
+####`/users/:id/values`
 
 **Method:** PUT
 
@@ -200,7 +200,7 @@ Structure of response:
 ```
 
 
-`/users/:id/values`
+####`/users/:id/values`
 
 **Method:** DELETE
 
@@ -222,7 +222,7 @@ Structure of response:
 
 ### User Journal
 
-`/users/:id/journal`
+####`/users/:id/journal`
 
 **Method:** POST
 
@@ -244,7 +244,7 @@ Structure of response:
 ```
 
 
-`/users/:id/journal`
+####`/users/:id/journal`
 
 **Method:** PUT
 
@@ -265,7 +265,7 @@ Structure of response:
 ```
 
 
-`/users/:id/journal`
+####`/users/:id/journal`
 
 **Method:** DELETE
 
@@ -280,7 +280,7 @@ Structure of response:
 
 ### User Projects
 
-`/users/:id/projects`
+####`/users/:id/projects`
 
 **Method:** POST
 
@@ -303,7 +303,7 @@ Structure of response:
 ```
 
 
-`/users/:id/projects`
+####`/users/:id/projects`
 
 **Method:** PUT
 
@@ -327,7 +327,7 @@ Structure of response:
 ```
 
 
-`/users/:id/projects`
+####`/users/:id/projects`
 
 **Method:** DELETE
 
