@@ -221,6 +221,24 @@ router.delete("/:id/journal", (req, res) => {
 });
 
 // DELETE values
-router.delete("/users/:id/values", (req, res) => {});
+router.delete("/:id/values", (req, res) => {
+  const { value_id, user_id } = req.body;
+
+  if (!value_id || !user_id) {
+    res
+      .status(400)
+      .json({ message: "You must submit a value id and user id." });
+  } else {
+    User.deleteUserValue(value_id, user_id).then(deleted => {
+      if (deleted > 0) {
+        return res.status(200).json({message: "The user's value has been deleted."})
+      } else {
+        res.status(404).json({message: "The user has not designated that value id as one of their values."})
+      }
+    }).catch(err => {
+      res.status(500).json({message: "There was an error deleted the user's value."})
+    })
+  }
+});
 
 module.exports = router;

@@ -16,7 +16,7 @@ module.exports = {
   getUserValueByValueId,
   deleteJournal,
   deleteProject,
-  deleteValue
+  deleteUserValue
 };
 
 
@@ -171,7 +171,7 @@ function getProjectById(id) {
 function deleteJournal(id) {
 
   return db("journal").where("user_id", id).del();
-  
+
 }
 
 function deleteProject(id) {
@@ -180,6 +180,9 @@ function deleteProject(id) {
 
 }
 
-function deleteValue(id) {
+function deleteUserValue(valueId, userId) {
 
+  return db("user_values")
+    .where({ value_id: valueId, user_id: userId })
+    .del();
 }
