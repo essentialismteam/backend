@@ -13,7 +13,10 @@ module.exports = {
   addValue,
   updateValue,
   getValueById,
-  getUserValueByValueId
+  getUserValueByValueId,
+  deleteJournal,
+  deleteProject,
+  deleteUserValue
 };
 
 
@@ -52,12 +55,17 @@ async function getCompleteUserInfo(userId) {
 }
 
 
+function updateUserInfo(id, userObject) {
+
+  return db("users").where("id", id).update(userObject, "id")
+
+}
+
+
 async function addJournal(entry) {
 
   const [id] = await db("journal").insert(entry, "id");
-
   const newJournal = await getJournalById(id);
-
   return newJournal;
 }
 
@@ -162,5 +170,24 @@ function getProjectById(id) {
   return db("projects")
     .where("id", id)
     .first();
-    
+
+}
+
+function deleteJournal(id) {
+
+  return db("journal").where("user_id", id).del();
+
+}
+
+function deleteProject(id) {
+
+  return db("projects").where("id", id).del();
+
+}
+
+function deleteUserValue(valueId, userId) {
+
+  return db("user_values")
+    .where({ value_id: valueId, user_id: userId })
+    .del();
 }
