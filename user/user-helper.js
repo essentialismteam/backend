@@ -3,6 +3,8 @@ const db = require("../database/db-config");
 module.exports = {
   getAllUsers,
   getCompleteUserInfo,
+  getUserAccountInfo,
+  updateUserInfo,
   addJournal,
   getJournalById,
   getUserJournalByUserId,
@@ -29,10 +31,7 @@ function getAllUsers() {
 
 async function getCompleteUserInfo(userId) {
 
-  const user = await db("users")
-    .select("users.id", "users.username", "users.first_name", "users.last_name")
-    .where("id", userId)
-    .first();
+  const user = await getUserAccountInfo(userId);
 
   const values = await db("users")
     .join("user_values", "users.id", "user_values.user_id")
@@ -54,13 +53,27 @@ async function getCompleteUserInfo(userId) {
 
 }
 
+function getUserAccountInfo(id) {
+
+  return db("users")
+    .select("users.id", "users.username", "users.first_name", "users.last_name")
+    .where("id", id)
+    .first();
+
+}
+
+
+function updateUserInfo(id, userObject) {
+
+  return db("users").where("id", id).update(userObject, "id")
+
+}
+
 
 async function addJournal(entry) {
 
   const [id] = await db("journal").insert(entry, "id");
-
   const newJournal = await getJournalById(id);
-
   return newJournal;
 }
 

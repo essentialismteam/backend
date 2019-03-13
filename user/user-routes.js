@@ -1,5 +1,5 @@
 const express = require("express");
-const dbErrors = require("../database/db-errors");
+const bcrypt = require('bcryptjs');
 
 const User = require("./user-helper");
 
@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
     });
 });
 
+// GET user's complete info
 router.get("/:id", (req, res) => {
   User.getCompleteUserInfo(req.params.id)
     .then(userInfo => {
@@ -29,7 +30,32 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// POST values
+// PUT user's info
+router.put("/:id", (req, res) => {
+  let updatedUser = req.body;
+
+  const { id } = req.params;
+  updatedUser.id = id;
+
+  if (!updatedUser.username || !updatedUser.password || !updatedUser.first_name) {
+    res.status(400).json({message: "Please provide a username, password, and first name to update the user info."})
+  } else {
+    const hash = bcrypt.hashSync(updatedUser.password, 10);
+    updatedUser.password = hash;
+
+    User.updateUserInfo(id, updatedUser).then(updated => {
+      if (updated > 0) {
+        res.status(200).json({message: "The user's info was successfully updated."})
+      } else {
+        res.status(404).json({message: "The user's info was not updated."})
+      }
+    }).catch(err => {
+      res.status(500).json({message: "There was an error updating the user's info."})
+    })
+  }
+})
+
+// POST to user's values
 router.post("/:id/values", (req, res) => {
   const { value_id, user_id } = req.body;
 
@@ -50,7 +76,7 @@ router.post("/:id/values", (req, res) => {
   }
 });
 
-// POST projects
+// POST to user's projects
 router.post("/:id/projects", (req, res) => {
   const { project_name, user_id } = req.body;
 
@@ -70,7 +96,7 @@ router.post("/:id/projects", (req, res) => {
       });
   }
 });
-// POST journal
+// POST to user's journal
 router.post("/:id/journal", (req, res) => {
   const { journal_entry, user_id } = req.body;
 
@@ -91,7 +117,7 @@ router.post("/:id/journal", (req, res) => {
   }
 });
 
-// PUT values
+// PUT a user's value
 router.put("/:id/values", (req, res) => {
   const { old_value_id, value_id, user_id } = req.body;
 
@@ -125,7 +151,7 @@ router.put("/:id/values", (req, res) => {
   }
 });
 
-// PUT projects
+// PUT a user's project
 router.put("/:id/projects", (req, res) => {
   const { project_name, id } = req.body;
 
@@ -150,7 +176,7 @@ router.put("/:id/projects", (req, res) => {
   }
 });
 
-// PUT journal
+// PUT a user's journal
 router.put("/:id/journal", (req, res) => {
   const { journal_entry, user_id } = req.body;
 
@@ -176,7 +202,7 @@ router.put("/:id/journal", (req, res) => {
   }
 });
 
-// DELETE projects
+// DELETE a user's project
 router.delete("/:id/projects", (req, res) => {
   let { id } = req.body;
 
@@ -201,7 +227,7 @@ router.delete("/:id/projects", (req, res) => {
   }
 });
 
-// DELETE journal
+// DELETE a user's journal
 router.delete("/:id/journal", (req, res) => {
   let { id } = req.params;
 
@@ -220,7 +246,7 @@ router.delete("/:id/journal", (req, res) => {
     });
 });
 
-// DELETE values
+// DELETE a user's value
 router.delete("/:id/values", (req, res) => {
   const { value_id, user_id } = req.body;
 
