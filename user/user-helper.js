@@ -9,6 +9,7 @@ module.exports = {
   updateJournal,
   addProject,
   getProjectById,
+  updateProject,
   addValue
 };
 
@@ -82,7 +83,9 @@ async function addValue(value) {
 }
 
 function updateJournal(userId, entry) {
+
     return db("journal").where("user_id", userId).update(entry, "id");
+
 }
 
 function getUserJournalByUserId(userId) {
@@ -91,4 +94,15 @@ function getUserJournalByUserId(userId) {
     .join("journal", "users.id", "journal.user_id")
     .select("journal.journal_entry as journal")
     .where("users.id", userId);
+
+}
+
+function updateProject(id, project) {
+
+    return db("projects").where("id", id).update(project, "id");
+    
+}
+
+function getProjectById(id) {
+    return db("projects").where("id", id).first();
 }
