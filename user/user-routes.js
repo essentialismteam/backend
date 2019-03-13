@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const User = require("./user-helper");
 
@@ -37,23 +37,27 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   updatedUser.id = id;
 
-  if (!updatedUser.username || !updatedUser.password || !updatedUser.first_name) {
-    res.status(400).json({message: "Please provide a username, password, and first name to update the user info."})
-  } else {
+  if (updatedUser.password) {
     const hash = bcrypt.hashSync(updatedUser.password, 10);
     updatedUser.password = hash;
+  };
 
-    User.updateUserInfo(id, updatedUser).then(updated => {
+  User.updateUserInfo(id, updatedUser)
+    .then(updated => {
       if (updated > 0) {
-        res.status(200).json({message: "The user's info was successfully updated."})
+        res
+          .status(200)
+          .json({ message: "The user's info was successfully updated." });
       } else {
-        res.status(404).json({message: "The user's info was not updated."})
+        res.status(404).json({ message: "The user's info was not updated." });
       }
-    }).catch(err => {
-      res.status(500).json({message: "There was an error updating the user's info."})
     })
-  }
-})
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: "There was an error updating the user's info." });
+    });
+});
 
 // POST to user's values
 router.post("/:id/values", (req, res) => {
@@ -255,15 +259,26 @@ router.delete("/:id/values", (req, res) => {
       .status(400)
       .json({ message: "You must submit a value id and user id." });
   } else {
-    User.deleteUserValue(value_id, user_id).then(deleted => {
-      if (deleted > 0) {
-        return res.status(200).json({message: "The user's value has been deleted."})
-      } else {
-        res.status(404).json({message: "The user has not designated that value id as one of their values."})
-      }
-    }).catch(err => {
-      res.status(500).json({message: "There was an error deleted the user's value."})
-    })
+    User.deleteUserValue(value_id, user_id)
+      .then(deleted => {
+        if (deleted > 0) {
+          return res
+            .status(200)
+            .json({ message: "The user's value has been deleted." });
+        } else {
+          res
+            .status(404)
+            .json({
+              message:
+                "The user has not designated that value id as one of their values."
+            });
+        }
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ message: "There was an error deleted the user's value." });
+      });
   }
 });
 
