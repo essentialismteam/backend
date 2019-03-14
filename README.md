@@ -6,7 +6,7 @@ This is the repository for the back-end of a Lambda School Build Week project ca
 
 The fully deployed project can be visited [here](https://essentialismmarketing.netlify.com/).
 
-The base URL for the deployed back-end is: [](https://essentialism-backend.herokuapp.com/)
+The base URL for the deployed back-end is: https://essentialism-backend.herokuapp.com/
 
 The code in this repository was authored by [Leigh-Ann Friedel](https://github.com/lafriedel).
 
