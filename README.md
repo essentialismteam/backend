@@ -1,10 +1,31 @@
-# backend
+# Essentialism: Backend API
+
+## About This Project
+
+This is the repository for the back-end of a Lambda School Build Week project called Essentialism. Essentialism is a web app that allows uses to create a profile, select values that are important to them, and compare their projects and obligations in life against their values. Are they well-aligned? Essentialism helps a use get the right things done.
+
+The fully deployed project can be visited [here](https://essentialismmarketing.netlify.com/).
+
+The base URL for the deployed back-end is: [](https://essentialism-backend.herokuapp.com/)
+
+The code in this repository was authored by [Leigh-Ann Friedel](https://github.com/lafriedel).
+
+## Getting Started
+
+If you'd like to work on this project on your local machine, follow these steps:
+
+* Fork repository and clone to your local machine.
+* Open project in your preferred code editor, and open the terminal.
+* Run `yarn` to download dependencies.
+* Run `yarn server` to spin up the server on your local machine.
+* To run the seed data for testing, run `knex seed:run` in the terminal.
+* Test the endpoints using Postman or your preferred API testing software.
 
 ## Endpoints
 
 ### Authentication
 
-####`/auth/register`
+#### `/auth/register`
 
 **Method:** POST
 
@@ -30,7 +51,7 @@ Structure of response:
 }
 ```
 
-####`/auth/login`
+#### `/auth/login`
 
 **Method:** POST
 
@@ -56,7 +77,7 @@ Structure of response:
 
 ### User Info
 
-####`/users/:id`
+#### `/users/:id`
 
 **Method:** PUT
 
@@ -79,7 +100,7 @@ Structure of response:
 }
 ```
 
-####`/users/:id`
+#### `/users/:id`
 
 **Method:** GET
 
@@ -125,7 +146,7 @@ Structure of response:
 ```
 ### Values
 
-####`/values`
+#### `/values`
 
 **Method:** GET
 
@@ -152,7 +173,7 @@ Structure of response:
 
 ### User Values
 
-####`/users/:id/values`
+#### `/users/:id/values`
 
 **Method:** POST
 
@@ -177,7 +198,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/values`
+#### `/users/:id/values`
 
 **Method:** PUT
 
@@ -200,7 +221,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/values`
+#### `/users/:id/values`
 
 **Method:** DELETE
 
@@ -222,7 +243,7 @@ Structure of response:
 
 ### User Journal
 
-####`/users/:id/journal`
+#### `/users/:id/journal`
 
 **Method:** POST
 
@@ -244,7 +265,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/journal`
+#### `/users/:id/journal`
 
 **Method:** PUT
 
@@ -265,7 +286,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/journal`
+#### `/users/:id/journal`
 
 **Method:** DELETE
 
@@ -280,7 +301,7 @@ Structure of response:
 
 ### User Projects
 
-####`/users/:id/projects`
+#### `/users/:id/projects`
 
 **Method:** POST
 
@@ -303,7 +324,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/projects`
+#### `/users/:id/projects`
 
 **Method:** PUT
 
@@ -327,7 +348,7 @@ Structure of response:
 ```
 
 
-####`/users/:id/projects`
+#### `/users/:id/projects
 
 **Method:** DELETE
 
