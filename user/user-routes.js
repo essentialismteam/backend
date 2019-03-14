@@ -225,10 +225,11 @@ router.put("/:id/journal", (req, res) => {
 
 // DELETE a user's project
 router.delete("/:id/projects", (req, res) => {
-  let { id } = req.body;
+  let id = req.body.id;
   let userId = req.params.id;
-console.log(req.body)
-  if (!id) {
+
+console.log(req.body);
+  if (!req.body) {
     res.status(400).json({ message: "You must submit a project id." });
   } else {
     User.getProjectById(id).then(project => {
