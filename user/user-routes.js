@@ -227,7 +227,7 @@ router.put("/:id/journal", (req, res) => {
 router.delete("/:id/projects", (req, res) => {
   let { id } = req.body;
   let userId = req.params.id;
-
+console.log(req.body)
   if (!id) {
     res.status(400).json({ message: "You must submit a project id." });
   } else {
@@ -246,7 +246,7 @@ router.delete("/:id/projects", (req, res) => {
         .catch(err => {
           res
             .status(500)
-            .json({ message: "There was an error deleting the project." });
+            .json(err);
         });
       } else {
         res.status(403).json({ message: "This project id does not belong to this user."})

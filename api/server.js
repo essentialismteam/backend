@@ -18,7 +18,7 @@ server.use('/users', authorize, userRoutes);
 server.use("/values", authorize, valuesRoutes);
 
 server.get('/', (req, res) => {
-    res.status(200).send("Welcome to the Essentialism API.");
+    res.status(200).json({message: "Welcome to the Essentialism API."});
 })
 
 module.exports = server;
