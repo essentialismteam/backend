@@ -246,7 +246,7 @@ console.log(req.body)
         .catch(err => {
           res
             .status(500)
-            .json(err);
+            .json({ message: "There was an error deleting the project." });
         });
       } else {
         res.status(403).json({ message: "This project id does not belong to this user."})
