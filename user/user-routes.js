@@ -224,17 +224,13 @@ router.put("/:id/journal", (req, res) => {
 });
 
 // DELETE a user's project
-router.delete("/:id/projects", (req, res) => {
-  let id = req.body.id;
+router.delete("/:id/projects/:projId", (req, res) => {
   let userId = req.params.id;
+  let projId = req.params.projId;
 
-console.log(req.body);
-  // if (!req.body) {
-  //   res.status(400).json({ message: "You must submit a project id." });
-  // } else {
-    User.getProjectById(id).then(project => {
+    User.getProjectById(projId).then(project => {
       if (userId === `${project.user_id}`) {
-        User.deleteProject(id)
+        User.deleteProject(projId)
         .then(deleted => {
           if (deleted > 0) {
             res
@@ -253,8 +249,6 @@ console.log(req.body);
         res.status(403).json({ message: "This project id does not belong to this user."})
       }
     })
-
-  // }
 });
 
 // DELETE a user's journal

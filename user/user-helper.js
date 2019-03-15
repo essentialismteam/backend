@@ -166,7 +166,7 @@ function updateProject(id, project) {
 }
 
 function getProjectById(id) {
-
+  console.log("getProjectById", id)
   return db("projects")
     .where("id", id)
     .first();
@@ -174,13 +174,13 @@ function getProjectById(id) {
 }
 
 function deleteJournal(id) {
-
+  
   return db("journal").where("user_id", id).del();
 
 }
 
 function deleteProject(id) {
-
+  console.log("deleteProject", id)
   return db("projects").where("id", id).del();
 
 }
