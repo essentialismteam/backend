@@ -72,5 +72,21 @@ describe("/users/:id/journal", () => {
             expect(res.type).toEqual("application/json");
         })
     })
+
+    describe("PUT journal", () => {
+        it("returns 201", async () => {
+            await request(server).post("/users/1/journal").send({journal_entry: "Text"})
+            const res = await request(server).put("/users/1/journal").send({journal_entry: "New text"})
+
+            expect(res.status).toEqual(201);
+        });
+
+        it("returns a JSON object", async () => {
+            await request(server).post("/users/1/journal").send({journal_entry: "Text"})
+            const res = await request(server).put("/users/1/journal").send({journal_entry: "Test"})
+
+            expect(res.type).toEqual("application/json");
+        })
+    })
 })
 });
