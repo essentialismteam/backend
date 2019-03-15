@@ -88,5 +88,21 @@ describe("/users/:id/journal", () => {
             expect(res.type).toEqual("application/json");
         })
     })
+
+    describe("DELETE journal", () => {
+        it("returns 200 OK", async () => {
+            await request(server).post("/users/1/journal").send({journal_entry: "Text"})
+            const res = await request(server).delete("/users/1/journal")
+
+            expect(res.status).toEqual(200);
+        })
+
+        it("returns success message", async () => {
+            await request(server).post("/users/1/journal").send({journal_entry: "Text"})
+            const res = await request(server).delete("/users/1/journal")
+
+            expect(res.body).toEqual({ message: "The journal entry has been deleted." })
+        })
+    })
 })
 });
