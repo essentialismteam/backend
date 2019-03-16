@@ -8,7 +8,7 @@ module.exports = {
   authorize
 };
 
-// custom authorization middleware for protected content
+// custom authorization middleware for protected content -- retrieves authorization key from headers sent by client
 function authorize(req, res, next) {
   const token = req.headers.authorization;
 

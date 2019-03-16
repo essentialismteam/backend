@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(cors());
 
 server.use('/auth', authRoutes);
-server.use('/users', authorize, userRoutes); // removed authorize middleware for testing, could not configure it to work in test suites
+server.use('/users', authorize, userRoutes);
 server.use("/values", authorize, valuesRoutes);
 
 server.get('/', (req, res) => {

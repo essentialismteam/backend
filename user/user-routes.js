@@ -5,18 +5,6 @@ const User = require("./user-helper");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  User.getAllUsers()
-    .then(users => {
-      res.status(200).json(users);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ message: "There was an error retrieving the users." });
-    });
-});
-
 // GET user's complete info
 router.get("/:id", (req, res) => {
   User.getCompleteUserInfo(req.params.id)
@@ -30,7 +18,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// PUT user's info
+// PUT user's contact/identifying info
 router.put("/:id", (req, res) => {
   let updatedUser = req.body;
 
@@ -59,7 +47,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// POST to user's values
+// POST to user's values -- only accepts one object per request
 router.post("/:id/values", (req, res) => {
   const { value_id } = req.body;
   const { id } = req.params;
@@ -82,7 +70,7 @@ router.post("/:id/values", (req, res) => {
   }
 });
 
-// POST to user's projects
+// POST to user's projects -- only accepts one object per request
 router.post("/:id/projects", (req, res) => {
   const { project_name } = req.body;
   const { id } = req.params;
@@ -104,7 +92,7 @@ router.post("/:id/projects", (req, res) => {
       });
   }
 });
-// POST to user's journal
+// POST to user's journal -- only accepts one object per request
 router.post("/:id/journal", (req, res) => {
   const { journal_entry } = req.body;
   const { id } = req.params;
@@ -127,7 +115,7 @@ router.post("/:id/journal", (req, res) => {
   }
 });
 
-// PUT a user's value
+// PUT a user's value -- only accepts one object per request
 router.put("/:id/values", (req, res) => {
   const { old_value_id, value_id } = req.body;
   const { id } = req.params;
@@ -162,7 +150,7 @@ router.put("/:id/values", (req, res) => {
   }
 });
 
-// PUT a user's project
+// PUT a user's project -- only accepts one object per request
 router.put("/:id/projects", (req, res) => {
   const { project_name, id } = req.body;
   let userId = req.params.id;
@@ -195,7 +183,7 @@ router.put("/:id/projects", (req, res) => {
   }
 });
 
-// PUT a user's journal
+// PUT a user's journal -- only accepts one object per request
 router.put("/:id/journal", (req, res) => {
   const { journal_entry } = req.body;
   const { id } = req.params;
