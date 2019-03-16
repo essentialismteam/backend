@@ -7,11 +7,7 @@ afterEach(async () => {
 })
 
 describe("server.js", () => {
-    // it("should set testing environment", () => {
-    //     expect(db.dbEnv).toBe("development");
-    //   });
 
-      
   describe("GET /", () => {
     it("responds 200 OK", async () => {
       const res = await request(server).get("/");

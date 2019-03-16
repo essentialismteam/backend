@@ -1,5 +1,4 @@
 const express = require("express");
-const dbErrors = require("../database/db-errors");
 
 const Values = require('./values-helper');
 
@@ -13,7 +12,7 @@ router.get("/", (req, res) => {
       .catch(err => {
         res
           .status(500)
-          .json({ message: `SQLite Error ${err.errno}: ${dbErrors[err.errno]}` });
+          .json({ message: "There was an error retrieving the values." });
       });
   });
 

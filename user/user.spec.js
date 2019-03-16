@@ -41,23 +41,6 @@ describe("user-routes.js", () => {
     });
   });
 
-//   describe("PUT /users/:id", () => {
-//     it("responds 200 OK", async () => {
-
-//         const res = await request(server)
-//           .put("/users/1").send({first_name: "Bob", last_name: "Hope"})
-//           // .set("Authorization", `Bearer ${token}`);
-  
-//         expect(res.status).toEqual(200);
-//       });
-  
-//       it.skip("returns a JSON object", async () => {
-//         const res = await request(server).get("/users/1");
-  
-//         expect(res.type).toEqual("application/json");
-//       });
-//   })
-
 describe("/users/:id/journal", () => {
     describe("POST journal", () => {
         it("returns 201", async () => {
