@@ -221,18 +221,11 @@ Structure of response:
 ```
 
 
-#### `/users/:id/values`
+#### `/users/:id/values/:valueId`
 
 **Method:** DELETE
 
 **Description:** Lets a user delete a value. Only one value can be deleted per request.
-
-Structure of request object:
-```
-{
-    value_id: 2 // required
-}
-```
 
 Structure of response:
 ```
@@ -348,18 +341,11 @@ Structure of response:
 ```
 
 
-#### `/users/:id/projects
+#### `/users/:id/projects/:projectId`
 
 **Method:** DELETE
 
 **Description:** Lets a user delete a project. Only one project can be deleted per request.
-
-Structure of request object:
-```
-{
-    id: 1 // developer must retrieve the project id from the /users/:id/projects POST response, required
-}
-```
 
 Structure of response:
 ```
