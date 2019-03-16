@@ -271,16 +271,11 @@ router.delete("/:id/journal", (req, res) => {
 });
 
 // DELETE a user's value
-router.delete("/:id/values", (req, res) => {
-  const { value_id } = req.body;
-  const { id } = req.params;
+router.delete("/:id/values/:valueId", (req, res) => {
+  let id = req.params.id;
+  let valueId = req.params.valueId;
 
-  if (!value_id) {
-    res
-      .status(400)
-      .json({ message: "You must submit a value id and user id." });
-  } else {
-    User.deleteUserValue(value_id, id)
+    User.deleteUserValue(valueId, id)
       .then(deleted => {
         if (deleted > 0) {
           return res
@@ -300,7 +295,6 @@ router.delete("/:id/values", (req, res) => {
           .status(500)
           .json({ message: "There was an error deleted the user's value." });
       });
-  }
 });
 
 module.exports = router;
